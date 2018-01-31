@@ -1,17 +1,49 @@
-<!doctype html>
-<html>
-    <form action="display_discount.php" method="post">
-        <div id="data">
-            <label>Product Description:</label>
-            <input type="text" name="product_description"><br>
-            <label>List Price:</label>
-            <input type="text" name="list_price"><br>
-            <label>Discount Percent:</label>
-            <input type="text" name="discount_percent"><sapn>%</sapn><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Product Discount Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div class="container" style="height:100vh;">
+    <div class="row align-items-center" style="height:100%;">
+        <div class="col-sm"></div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Discount Calculator
+                </div>
+                <div class="card-body">
+                    <form action="display_discount.php" method="post">
+                        <div id="data">
+                            <div class="form-group">
+                                <label for="productdescription">Product Description:</label>
+                                <input type="text" name="product_description" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">List Price:</label>
+                                <input type="text" name="list_price" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="percent">Percent:</label>
+                                <input type="text" name="discount_percent" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Calculate Discount">
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div id="buttons">
-            <label>&nbsp;</label>
-            <input type="submit" value="Calculate Discount"><br>
-        </div>
-    </form>
+        <div class="col-sm"></div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
 </html>
