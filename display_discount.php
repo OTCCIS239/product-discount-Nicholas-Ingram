@@ -22,41 +22,6 @@
     $discount_price_f = "$".number_format($discount_price, 2);
 ?>
 
-<!-- <!DOCTYPE html>
-<html>
-
-<head>
-    <title>Product Discount Calculator</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
-</head>
-
-<body>
-    <main>
-        <h1>Product Discount Calculator</h1>
-
-        <label>Product Description:</label>
-        <span><?= $product_description ?></span>
-        <br>
-
-        <label>List Price:</label>
-        <span><?= $list_price_f ?></span>
-        <br>
-
-        <label>Standard Discount:</label>
-        <span><?= $discount_f ?></span>
-        <br>
-
-        <label>Discount Amount:</label>
-        <span><?= $discount_percent_f ?></span>
-        <br>
-
-        <label>Discount Price:</label>
-        <span><?= $discount_price_f ?></span>
-        <br>
-    </main>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
