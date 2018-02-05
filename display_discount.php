@@ -7,17 +7,17 @@
  */
 
     //Get the data from the form
-    $product_description = $_POST['product_description'];
+    $product = $_POST['product'];
     $list_price = $_POST['list_price'];
-    $discount_percent = $_POST['discount_percent'];
+    $coupon_percent = $_POST['coupon_percent'];
 
     //Calculate the discount and discounted price
-    $discount = $list_price * $discount_percent * .01;
+    $discount = $list_price * $coupon_percent * .01;
     $discount_price = $list_price - $discount;
 
     //Apply currency formatting to the dollar and percent amounts
     $list_price_f = "$".number_format($list_price, 2);
-    $discount_percent_f = $discount_percent."%";
+    $discount_percent_f = $coupon_percent."%";
     $discount_f = "$".number_format($discount, 2);
     $discount_price_f = "$".number_format($discount_price, 2);
 ?>
@@ -43,8 +43,8 @@
                         <form action="display_discount.php" method="post">
                             <div id="data">
                                 <div class="form-group">
-                                    <label for="productdescription">Product Description:</label><br>
-                                    <span class="ml-5"><?= $product_description ?></span>
+                                    <label for="productdescription">Product:</label><br>
+                                    <span class="ml-5"><?= $product ?></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="price">List Price:</label><br>

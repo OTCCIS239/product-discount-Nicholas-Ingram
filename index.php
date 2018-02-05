@@ -1,3 +1,14 @@
+<?php
+
+    $products = ['Xbox One', 'PS4', 'Switch', 'Monster Hunter World', 'Super Mario Odyssey', 'Breath of the Wild', 'Super Meatboy Forever'];
+    $coupons = [
+        '10' => 'Student Discount',
+        '20' => 'Employee Discount',
+        '30' => 'Military Discount'
+    ];
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +30,12 @@
                     <form action="display_discount.php" method="post">
                         <div id="data">
                             <div class="form-group">
-                                <label for="productdescription">Product Description:</label>
-                                <input type="text" name="product_description" class="form-control">
+                                <label for="products">Products:</label>
+                                <select class="form-control" name="product">
+                                    <?php foreach($products as $product): ?>
+                                        <option value="<?= $product ?>"><?= $product ?></a>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="price">List Price:</label>
@@ -28,7 +43,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="percent">Percent:</label>
-                                <input type="text" name="discount_percent" class="form-control">
+                                <select name="coupon_percent" class="form-control">
+                                    <?php foreach($coupons as $key => $coupon): ?>
+                                        <option value="<?= $key ?>"><?= $key.'% - '.$coupon ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
