@@ -1,23 +1,41 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nickq
- * Date: 1/29/2018
- * Time: 9:19 AM
- */
+    require_once('./db.php');
 
-    //Get the data from the form
-    $product = $_POST['product'];
-    $list_price = $_POST['list_price'];
-    $coupon_percent = $_POST['coupon_percent'];
+    $productId = $_POST['product_id'];
+    $couponId = $_POST['coupon_id'];
+
+    // $query = "SELECT * FROM products WHERE id = :product_id";
+    // $statement = $conn->prepare($query);
+    // $statement->bindValue(':product_id', $productId);
+    // $statement->execute();
+    // $product = $statement->fetch();
+    // $statement->closeCursor();
+    
+    $product = getOne("SELECT * FROM products WHERE id = :product_id", [
+        ':product_id' => $productId
+    ], $conn);
+    $coupon = getOne("SELECT * FROM coupons WHERE id = :coupon_id", [
+        ':coupon_id' => $couponId
+    ], $conn);
+
+    // $query = "SELECT * FROM coupons WHERE id = :coupon_id";
+    // $statement = $conn->prepare($query);
+    // $statement->bindValue(':coupon_id', $couponId);
+    // $statement->execute();
+    // $coupon = $statement->fetch();
+    // $statement->closeCursor();
+
+    $description = $product['description'];
+    $price = $product['price'];
+    $discount_percent = $coupon['discount_percent'];
 
     //Calculate the discount and discounted price
-    $discount = $list_price * $coupon_percent * .01;
-    $discount_price = $list_price - $discount;
+    $discount = $price * $discount_percent * .01;
+    $discount_price = $price - $discount;
 
     //Apply currency formatting to the dollar and percent amounts
-    $list_price_f = "$".number_format($list_price, 2);
-    $discount_percent_f = $coupon_percent."%";
+    $list_price_f = "$".number_format($price, 2);
+    $discount_percent_f = $discount_percent."%";
     $discount_f = "$".number_format($discount, 2);
     $discount_price_f = "$".number_format($discount_price, 2);
 ?>
@@ -40,30 +58,30 @@
                         Discount Calculator
                     </div>
                     <div class="card-body">
-                        <form action="display_discount.php" method="post">
-                            <div id="data">
-                                <div class="form-group">
-                                    <label for="productdescription">Product:</label><br>
-                                    <span class="ml-5"><?= $product ?></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="price">List Price:</label><br>
-                                    <span class="ml-5"><?= $list_price_f ?></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="percent">Standard Discount:</label><br>
-                                    <span class="ml-5"><?= $discount_f ?></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="discountpercent">Discount Percent:</label><br>
-                                    <span class="ml-5"><?= $discount_percent_f ?></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="discountprice">Discount Price:</label><br>
-                                    <span class="ml-5"><?= $discount_price_f ?></span>
-                                </div>
-                            </div>
-                        </form>
+                        <div class="card-header">
+                            Discount Calculator
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-6">Description</dt>
+                                <dd class="col-6"><?= $description ?></dd>
+
+                                <dt class="col-6">List Price</dt>
+                                <dd class="col-6"><?= $price ?></dd>
+
+                                <dt class="col-6">Coupon</dt>
+                                <dd class="col-6"><?= $coupon['code']." - ".$coupon['description'] ?></dd>
+
+                                <dt class="col-6">Discount</dt>
+                                <dd class="col-6"><?= $discount_f ?></dd>
+
+                                <dt class="col-6">Discount Amount</dt>
+                                <dd class="col-6"><?= $discount_price_f ?></dd>
+
+                                <dt class="col-6">Discount Price</dt>
+                                <dd class="col-6"><?= $discount_price_f ?></dd>
+                            </dl>
+                        </div>
                     </div>
                 </div>
             </div>

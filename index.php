@@ -1,12 +1,18 @@
 <?php
+    require_once('./db.php');
 
-    $products = ['Xbox One', 'PS4', 'Switch', 'Monster Hunter World', 'Super Mario Odyssey', 'Breath of the Wild', 'Super Meatboy Forever'];
-    $coupons = [
-        '10' => 'Student Discount',
-        '20' => 'Employee Discount',
-        '30' => 'Military Discount'
-    ];
+    $query = "SELECT * FROM products WHERE in_stock > 0";
 
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $products = $statement->fetchAll();
+    $statement->closeCursor();
+
+    $query = "SELECT * FROM coupons WHERE deleted_at IS NULL";
+    $statement = $conn->prepare($query);
+    $statement->execute();
+    $coupons = $statement->fetchAll();
+    $statement->closeCursor();
  ?>
 
 <!DOCTYPE html>
@@ -31,21 +37,17 @@
                         <div id="data">
                             <div class="form-group">
                                 <label for="products">Products:</label>
-                                <select class="form-control" name="product">
+                                <select class="form-control" name="product_id" id="product_id">
                                     <?php foreach($products as $product): ?>
-                                        <option value="<?= $product ?>"><?= $product ?></a>
+                                        <option value="<?= $product['id'] ?>"><?= $product['name'].' - $'.$product['price'] ?></a>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="price">List Price:</label>
-                                <input type="text" name="list_price" class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <label for="percent">Percent:</label>
-                                <select name="coupon_percent" class="form-control">
-                                    <?php foreach($coupons as $key => $coupon): ?>
-                                        <option value="<?= $key ?>"><?= $key.'% - '.$coupon ?></option>
+                                <select name="coupon_id" id="coupon_id" class="form-control">
+                                    <?php foreach($coupons as $coupon): ?>
+                                        <option value="<?= $coupon['id'] ?>"><?= $coupon['code'].' - '.$coupon['discount_percent'].'% Off' ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
